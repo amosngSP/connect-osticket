@@ -118,7 +118,8 @@ class VATSIMClientAuthBackend extends ExternalUserAuthenticationBackend {
                 $info['first'] = $_SESSION[':oauth']['name_first'];
                 $info['last'] = $_SESSION[':oauth']['name_last'];
                 $info['username'] = $_SESSION[':oauth']['cid'];
-
+                $info['rating_id'] =  $_SESSION[':oauth']['rating_id'];
+                $info['rating_name'] = $_SESSION[':oauth']['rating_name'];
                 $client = new ClientCreateRequest($this, $_SESSION[':oauth']['cid'], $info);
                 return $client->attemptAutoRegister();
             }
