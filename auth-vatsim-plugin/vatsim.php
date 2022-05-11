@@ -140,10 +140,14 @@ class VATSIMClientAuthBackend extends ExternalUserAuthenticationBackend {
 
         if(!isset($response->data->cid))
             return;
+        if(($response->data->vatsim->rating->id)<1)
+            return;
         $_SESSION[':oauth']['cid'] = $response->data->cid;
         $_SESSION[':oauth']['email'] = $response->data->personal->email;
         $_SESSION[':oauth']['name_first'] = $response->data->personal->name_first;
         $_SESSION[':oauth']['name_last'] = $response->data->personal->name_last;
+        $_SESSION[':oauth']['rating_id'] = strval($response->data->vatsim->rating->id);
+        $_SESSION[':oauth']['rating_name'] = $response->data->vatsim->rating->long;
         Http::redirect(ROOT_PATH . 'login.php');
     }
 }
